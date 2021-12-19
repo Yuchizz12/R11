@@ -4,12 +4,12 @@ import Stack from '@mui/material/Stack'
 
 const ColorChips =()=> {
   return (
-    <Stack spacing={1} alignItems="start">
+    <Stack spacing={4} alignItems="start">
       <Stack direction="row" spacing={1}>
-        <Chip label="primary" color="primary" />
-        <Chip label="success" color="success" />
-        <Chip label="success" color="success" />
-        <Chip label="success" color="success" />
+        <Chip label="Y-Robot" color="primary" />
+        <Chip label="X-Robot" color="success" />
+        <Chip label="Roomba" color="success" />
+        <Chip label="Drone" color="success" />
       </Stack>
     </Stack>
   )

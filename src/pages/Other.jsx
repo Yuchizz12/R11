@@ -10,6 +10,7 @@ import { OrbitControls } from '@react-three/drei'
 // import Map from '../components/Map'
 // import Model from '../components/Model'
 import TexturedBox from '../components/TexturedBox'
+import logo from '../resources/images/mapping_steves_apartment.gif'
 
 const Other = ({ children }) => {
   const [mode, setMode] = useState('light')
@@ -22,11 +23,12 @@ const Other = ({ children }) => {
     <ThemeProvider theme={theme}>
       {/* <LocalizationProvider dateAdapter={DateAdapter}>{children}</LocalizationProvider> */}
       <CssBaseline />
-      {/* <TexturedBox /> */}
+      // <TexturedBox />
       {/* <Map /> */}
       {/* <Model /> */}
       {/* <Button variant='contained'>Hello World</Button> */}
       {/* <Gif /> */}
+      <img src={logo} alt="loading..." />
     </ThemeProvider>
   )
 }

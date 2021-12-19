@@ -1,5 +1,7 @@
 {
   "name": "r2",
+  "license": "MIT",
+  "private": true,
   "version": "1.0.0",
   "description": "",
   "keywords": [
@@ -35,7 +37,6 @@
     "three-plain-animator": "^1.0.6"
   },
   "devDependencies": {
-    "license": "MIT",
     "sass": "^1.45.0"
   },
   "scripts": {

@@ -1,7 +1,7 @@
 import * as THREE from 'three'
 import React, { useRef, Suspense } from 'react'
 import { Canvas, Dom, useFrame, useLoader } from 'react-three-fiber'
-import textureUrl from '../resources/images/crate.gif'
+import textureUrl from '../resources/images/mapping_steves_apartment.gif'
 
 function Cube() {
   const mesh = useRef()
@@ -28,5 +28,5 @@ const TexturedBox = () => {
   )
 }
 
-export { TexturedBox };
+export default TexturedBox
 
