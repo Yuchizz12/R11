@@ -7,6 +7,7 @@ import NavBar from './components/NavBar'
 import Other from './pages/Other'
 // import TexturedBox from './components/TexturedBox'
 import City from './components/city/City'
+import Plane from './pages/Plane'
 
 
 const App = ({ children }) => {
@@ -46,6 +47,9 @@ const App = ({ children }) => {
         </Routes>
         <Routes>
           <Route path="/city" element={<City />} />
+        </Routes>
+        <Routes>
+          <Route path="/plane" element={<Plane />} />
         </Routes>
       </Router>
     </ThemeProvider>

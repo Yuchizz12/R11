@@ -51,6 +51,9 @@ const DraggableDialog =()=> {
             <Button variant="contained" color="primary" component={Link} to="/other">
               Other
             </Button>
+            <Button variant="contained" color="primary" component={Link} to="/plane">
+              Plane
+            </Button>
           </DialogContentText>
         </DialogContent>
         <DialogActions>

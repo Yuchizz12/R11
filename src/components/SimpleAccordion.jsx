@@ -98,11 +98,11 @@ const SimpleAccordion = ()=> {
           </Typography>
         </AccordionDetails>
       </Accordion>
-      <Accordion disabled>
+      {/* <Accordion disabled>
         <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel3a-content" id="panel3a-header">
           <Typography>Disabled Accordion</Typography>
         </AccordionSummary>
-      </Accordion>
+      </Accordion> */}
     </div>
   )
 }
