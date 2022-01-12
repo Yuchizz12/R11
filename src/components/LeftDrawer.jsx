@@ -36,7 +36,7 @@ const LeftDrawer = ()=> {
       // onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}>
       <List>
-        <Button onClick={toggleDrawer(anchor, false)} variant="outlined">
+        <Button sx={{ m: 2 }} onClick={toggleDrawer(anchor, false)} variant="outlined">
           x
         </Button>
         {/* {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
@@ -46,29 +46,31 @@ const LeftDrawer = ()=> {
           </ListItem>
         ))} */}
       </List>
-      <Divider />
-      <BasicDatePicker />
-      {/* <BasicDatePicker /> */}
-      <BasicTimePicker />
-      <Divider />
-      <List>
-        {/* {['All mail', 'Trash', 'Spam'].map((text, index) => (
+      <Box sx={{ m: 2 }}>
+        <Divider />
+        <BasicDatePicker />
+        {/* <BasicDatePicker /> */}
+        <BasicTimePicker />
+        <Divider />
+        <List>
+          {/* {['All mail', 'Trash', 'Spam'].map((text, index) => (
           <ListItem button key={text}>
             <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
             <ListItemText primary={text} />
           </ListItem>
         ))} */}
-      </List>
-      <RadioButtonsGroup />
-      <List>
-        {/* {['All mail', 'Trash', 'Spam'].map((text, index) => (
+        </List>
+        <RadioButtonsGroup />
+        <List>
+          {/* {['All mail', 'Trash', 'Spam'].map((text, index) => (
           <ListItem button key={text}>
             <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
             <ListItemText primary={text} />
           </ListItem>
         ))} */}
-      </List>
-      <BasicSelect />
+        </List>
+        <BasicSelect />
+      </Box>
     </Box>
   )
 

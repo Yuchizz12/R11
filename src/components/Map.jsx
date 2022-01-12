@@ -1,8 +1,6 @@
 import React, { useRef, useState } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { OrbitControls } from '@react-three/drei'
-// import Gif from './atoms/Gif'
-
 
 const Box = (props) => {
   const boxRef = useRef()
@@ -30,6 +28,20 @@ const Box = (props) => {
         <boxGeometry attach="geometry" />
         <meshLambertMaterial attach="material" color={active ? 'green' : 'gray'} />
       </mesh>
+      <mesh position={[-5, 0, 0]}>
+        <cylinderBufferGeometry attach="geometry" args={[1, 1, 2, 32]} />
+        <meshNormalMaterial attach="material" />
+      </mesh>
+      {/* <mesh position={[1, 0, 0]}>
+        <cylinderBufferGeometry attach="geometry" args={[1, 1, 2, 32]} />
+        <meshNormalMaterial attach="material" />
+      </mesh>
+      <mesh position={[10, 0, 0]}>
+        <cylinderBufferGeometry attach="geometry" args={[1, 1, 2, 32]} />
+        <meshNormalMaterial attach="material" />
+      </mesh> */}
+      <OrbitControls />
+      <gridHelper />
     </group>
   )
 }
@@ -44,17 +56,11 @@ const Map = ()=> {
         <ambientLight intensity={0.5} />
         <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
         <pointLight position={[-10, -10, -10]} />
-        <Box position={[-1.8, 0, 0]} />
-        <Box position={[1.2, 0, 0]} />
-        <Box position={[4.2, 0, 0]} />
-        <ambientLight intensity={0.5} />
-        <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
-        <pointLight position={[-10, -10, -10]} />
-        <Box position={[-1.8, 0, 0]} />
-        <Box position={[1.2, 0, 0]} />
-        <Box position={[4.2, 0, 0]} />
-        {/* <Gif /> */}
+        <Box position={[-20, 0, 0]} />
+        <Box position={[1, 0, 0]} />
+        <Box position={[30, 0, 0]} />
         <OrbitControls />
+        <gridHelper args={[100, 100]} />
       </Canvas>
     </>
   )

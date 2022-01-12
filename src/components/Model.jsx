@@ -4,7 +4,6 @@ import {render} from 'react-dom';
 import DeckGL from '@deck.gl/react';
 import {COORDINATE_SYSTEM, OrbitView, LinearInterpolator} from '@deck.gl/core';
 import { PointCloudLayer } from '@deck.gl/layers';
-// import NavBar from './NavBar'
 
 import {LASWorkerLoader} from '@loaders.gl/las';
 
@@ -79,7 +78,6 @@ const Model = ({onLoad, Drawer}) => {
   return (
     <>
       <div>button</div>
-      {/* <NavBar /> */}
       <DeckGL
         views={new OrbitView({ orbitAxis: 'Y', fov: 50 })}
         viewState={viewState}
@@ -96,6 +94,3 @@ const Model = ({onLoad, Drawer}) => {
 }
 
 export default Model
-// export function renderToDOM(container) {
-//   render(<App />, container);
-// }

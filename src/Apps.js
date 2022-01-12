@@ -9,7 +9,7 @@ import City from './components/city/City'
 import Plane from './pages/Plane'
 
 
-const App = ({ children }) => {
+const Apps = ({ children }) => {
   const [mode, setMode] = useState('light')
   const theme = createTheme({
     palette: {
@@ -54,4 +54,4 @@ const App = ({ children }) => {
     </ThemeProvider>
   )
 }
-export default App
+export default Apps

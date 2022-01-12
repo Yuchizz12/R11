@@ -4,8 +4,6 @@ import {render} from 'react-dom';
 import DeckGL from '@deck.gl/react';
 import {COORDINATE_SYSTEM, OrbitView, LinearInterpolator} from '@deck.gl/core';
 import { PointCloudLayer } from '@deck.gl/layers';
-// import { Drawer } from './components/Drawer'
-// import { ChakraProvider } from '@chakra-ui/react'
 
 import {LASWorkerLoader} from '@loaders.gl/las';
 
@@ -93,7 +91,3 @@ export default function Modeling({onLoad, Drawer}) {
     </>
   );
 }
-
-// export function renderToDOM(container) {
-//   render(<App />, container);
-// }

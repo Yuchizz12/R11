@@ -1,5 +1,4 @@
 import * as THREE from 'three'
-import ReactDOM from 'react-dom'
 import React, { Suspense, useState, useRef, useEffect, useLayoutEffect, useMemo } from 'react'
 import { Canvas, useLoader } from '@react-three/fiber'
 import { SVGLoader } from 'three/examples/jsm/loaders/SVGLoader'
@@ -59,16 +58,19 @@ function Svg({ url }) {
 
 function City() {
   return (
-    <Canvas frameloop="demand" orthographic camera={{ position: [0, 0, 50], zoom: 2, up: [0, 0, 1], far: 10000 }}>
+    <><Canvas frameloop="demand" orthographic camera={{ position: [0, 0, 50], zoom: 2, up: [0, 0, 1], far: 10000 }}>
       <Suspense fallback={null}>
-        <Svg url="/map.svg" />
-        <Svg url="/map.svg" />
         <Svg url="/map.svg" />
       </Suspense>
       <MapControls />
       <OrbitControls />
-    </Canvas>
+    </Canvas><Canvas frameloop="demand" orthographic camera={{ position: [0, 0, 50], zoom: 2, up: [0, 0, 1], far: 10000 }}>
+        <Suspense fallback={null}>
+          <Svg url="/map.svg" />
+        </Suspense>
+        <MapControls />
+        <OrbitControls />
+      </Canvas></>
   )
 }
 export default City
-// ReactDOM.render(<App />, document.getElementById('root'))
