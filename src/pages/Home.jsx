@@ -8,10 +8,11 @@ import { OrbitControls } from '@react-three/drei'
 // import DateAdapter from '@mui/lab/AdapterDateFns'
 // import DateAdapter from '@mui/lab/AdapterDateFns'
 import Map from '../components/Map'
+import Modeling from './Modeling'
 // import Model from '../components/Model'
 
 const Home = ({ children }) => {
-  const [mode, setMode] = useState('dark')
+  const [mode, setMode] = useState('light')
   const theme = createTheme({
     palette: {
       mode

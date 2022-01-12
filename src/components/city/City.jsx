@@ -62,9 +62,11 @@ function City() {
     <Canvas frameloop="demand" orthographic camera={{ position: [0, 0, 50], zoom: 2, up: [0, 0, 1], far: 10000 }}>
       <Suspense fallback={null}>
         <Svg url="/map.svg" />
+        <Svg url="/map.svg" />
+        <Svg url="/map.svg" />
       </Suspense>
-          <MapControls />
-          <OrbitControls />
+      <MapControls />
+      <OrbitControls />
     </Canvas>
   )
 }

@@ -11,7 +11,7 @@ import Plane from './pages/Plane'
 
 
 const App = ({ children }) => {
-  const [mode, setMode] = useState('dark')
+  const [mode, setMode] = useState('light')
   const theme = createTheme({
     palette: {
       mode
