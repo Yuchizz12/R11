@@ -31,7 +31,7 @@ const LeftDrawer = ()=> {
 
   const list = (anchor) => (
     <Box
-      sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
+      sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 650 }}
       role="presentation"
       // onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}>
@@ -50,8 +50,9 @@ const LeftDrawer = ()=> {
         <Divider />
         <BasicDatePicker />
         {/* <BasicDatePicker /> */}
-        <BasicTimePicker />
+
         <Divider />
+        <BasicTimePicker />
         <List>
           {/* {['All mail', 'Trash', 'Spam'].map((text, index) => (
           <ListItem button key={text}>

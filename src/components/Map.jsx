@@ -1,11 +1,14 @@
 import React, { useRef, useState } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { OrbitControls } from '@react-three/drei'
+import NearMeIcon from '@mui/icons-material/NearMe'
+import { Nodes, Node } from './Nodes'
 
 const Box = (props) => {
   const boxRef = useRef()
   const [active, setActive] = useState(false)
   const [hover, setHover] = useState(false)
+  // const [[a, b, c, d, e]] = useState(() => [...Array(5)].map(createRef))
 
   useFrame(() => {
     if (hover) {
@@ -40,6 +43,7 @@ const Box = (props) => {
         <cylinderBufferGeometry attach="geometry" args={[1, 1, 2, 32]} />
         <meshNormalMaterial attach="material" />
       </mesh> */}
+
       <OrbitControls />
       <gridHelper />
     </group>

@@ -8,6 +8,7 @@ import FormControlLabel from '@mui/material/FormControlLabel'
 import FormControl from '@mui/material/FormControl'
 import FormLabel from '@mui/material/FormLabel'
 import List from '@mui/material/List'
+import TimePicker from '@mui/lab/TimePicker'
 
  const BasicDatePicker = ( ) => {
   const [value, setValue] = React.useState(null)
@@ -15,7 +16,7 @@ import List from '@mui/material/List'
   return (
     <>
       <LocalizationProvider dateAdapter={AdapterDateFns}>
-        <FormControl component="fieldset">
+        <FormControl sx={{ m: 2 }} component="fieldset">
           <FormLabel component="legend">モード</FormLabel>
           <DatePicker
             label="From"
@@ -27,11 +28,16 @@ import List from '@mui/material/List'
           />
           <Divider />
           <List></List>
-          <DatePicker
-            label="To"
-            value={endValue}
+        </FormControl>
+      </LocalizationProvider>
+      <LocalizationProvider dateAdapter={AdapterDateFns}>
+        <FormControl sx={{ m: 2 }} component="fieldset">
+          <FormLabel component="legend">モード</FormLabel>
+          <TimePicker
+            label="Time"
+            value={value}
             onChange={(newValue) => {
-              setEndValue(newValue)
+              setValue(newValue)
             }}
             renderInput={(params) => <TextField {...params} />}
           />
