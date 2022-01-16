@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>three.js webgl - svg loader</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link type="text/css" rel="stylesheet" href="main.css">
+		<style>
+			body {
+				background-color: #b0b0b0;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<div id="container"></div>
+		<div id="info">
+			<a href="https://threejs.org" target="_blank" rel="noopener">three.js</a> - SVGLoader
+			<button id="export">export to obj</button>
+			<button id="rotateX">rotate x</button>
+			<button id="rotateY">rotate y</button>
+			<button id="rotateZ">rotate z</button>
+		</div>
+
+		<script type="module">
+
+			import * as THREE from '../build/three.module.js';
+
+			import Stats from './jsm/libs/stats.module.js';
+
+			import { GUI } from './jsm/libs/dat.gui.module.js';
+			import { OrbitControls } from './jsm/controls/OrbitControls.js';
+			import { SVGLoader } from './jsm/loaders/SVGLoader.js';
+			import { OBJExporter } from './jsm/exporters/OBJExporter.js';
+
+
+			let renderer, stats, scene, camera, gui, guiData, group;
+			let exportButton;
+			let rotateButtonX, rotateButtonY, rotateButtonZ;
+
+			init();
+			animate();
+
+			//
+
+			function init() {
+
+				const container = document.getElementById( 'container' );
+
+				//
+
+				camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 1000 );
+				camera.position.set( 300, 200, 500 );
+
+				//
+
+				renderer = new THREE.WebGLRenderer( { antialias: true } );
+				renderer.setPixelRatio( window.devicePixelRatio );
+				renderer.setSize( window.innerWidth, window.innerHeight );
+				container.appendChild( renderer.domElement );
+
+				//
+
+				const controls = new OrbitControls( camera, renderer.domElement );
+				controls.screenSpacePanning = true;
+	
+				//
+
+				stats = new Stats();
+				container.appendChild( stats.dom );
+
+				//
+
+				window.addEventListener( 'resize', onWindowResize );
+
+				exportButton = document.getElementById( 'export' );
+				exportButton.addEventListener( 'click', function () {
+
+					exportToObj();
+
+				} );
+
+				rotateButtonX = document.getElementById( 'rotateX' );
+				rotateButtonY = document.getElementById( 'rotateY' );
+				rotateButtonZ = document.getElementById( 'rotateZ' );
+				
+				rotateButtonX.addEventListener( 'click', function () {
+					group.rotateX(degToRad(90));
+				} );
+
+				
+				rotateButtonY.addEventListener( 'click', function () {
+					group.rotateY(degToRad(90));
+				} );
+
+
+				rotateButtonZ.addEventListener( 'click', function () {
+					group.rotateZ(degToRad(90));
+				} );
+
+
+
+				guiData = {
+					currentURL: 'models/svg/KG128PL1_Reviced.svg',
+					drawFillShapes: true,
+					drawStrokes: true,
+					fillShapesWireframe: false,
+					strokesWireframe: false
+				};
+
+				loadSVG( guiData.currentURL );
+
+				createGUI();
+
+			}
+
+			function createGUI() {
+
+				if ( gui ) gui.destroy();
+
+				gui = new GUI( { width: 350 } );
+
+				gui.add( guiData, 'currentURL', {
+
+					"FloorMap1F": 'models/svg/KG128PL1_Reviced.svg', 
+					"FloorMap2F": 'models/svg/KG128PL2_Reviced.svg', 
+					"FloorMap3F": 'models/svg/KG128PL3_Reviced.svg', 
+					"Tiger": 'models/svg/tiger.svg',
+					"Three.js": 'models/svg/threejs.svg',
+					"Joins and caps": 'models/svg/lineJoinsAndCaps.svg',
+					"Hexagon": 'models/svg/hexagon.svg',
+					"Energy": 'models/svg/energy.svg',
+					"Test 1": 'models/svg/tests/1.svg',
+					"Test 2": 'models/svg/tests/2.svg',
+					"Test 3": 'models/svg/tests/3.svg',
+					"Test 4": 'models/svg/tests/4.svg',
+					"Test 5": 'models/svg/tests/5.svg',
+					"Test 6": 'models/svg/tests/6.svg',
+					"Test 7": 'models/svg/tests/7.svg',
+					"Test 8": 'models/svg/tests/8.svg',
+					"Test 9": 'models/svg/tests/9.svg',
+					"Units": 'models/svg/tests/units.svg',
+					"Defs": 'models/svg/tests/testDefs/Svg-defs.svg',
+					"Defs2": 'models/svg/tests/testDefs/Svg-defs2.svg',
+					"Defs3": 'models/svg/tests/testDefs/Wave-defs.svg',
+					"Defs4": 'models/svg/tests/testDefs/defs4.svg',
+					"Defs5": 'models/svg/tests/testDefs/defs5.svg',
+					"Zero Radius": 'models/svg/zero-radius.svg'
+
+				} ).name( 'SVG File' ).onChange( update );
+
+				gui.add( guiData, 'drawStrokes' ).name( 'Draw strokes' ).onChange( update );
+
+				gui.add( guiData, 'drawFillShapes' ).name( 'Draw fill shapes' ).onChange( update );
+
+				gui.add( guiData, 'strokesWireframe' ).name( 'Wireframe strokes' ).onChange( update );
+
+				gui.add( guiData, 'fillShapesWireframe' ).name( 'Wireframe fill shapes' ).onChange( update );
+
+				function update() {
+
+					loadSVG( guiData.currentURL );
+
+				}
+
+			}
+
+			function loadSVG( url ) {
+
+				//
+
+				scene = new THREE.Scene();
+				scene.background = new THREE.Color( 0xEEEEEE );
+
+				//
+
+				const helper = new THREE.GridHelper( 1000, 20, 0xEEEEEE );
+				// helper.rotation.x = Math.PI / 2;
+				scene.add( helper );
+
+				//
+
+				// 平行光源
+				const directionalLight = new THREE.DirectionalLight(0xEEEEEE);
+				directionalLight.position.set(-1, 1, -1);
+				scene.add(directionalLight);
+
+				// 環境光
+				var ambientLight = new THREE.AmbientLight(0xC5AFA4);
+				scene.add( ambientLight )
+
+				const loader = new SVGLoader();
+
+				loader.load( url, function ( data ) {
+
+					const paths = data.paths;
+					console.log(paths.length);
+
+					group = new THREE.Group();
+					group.rotateX(degToRad(90));
+					group.scale.multiplyScalar( 0.25 );
+				
+					for ( let i = 0; i < paths.length; i ++ ) {
+						const path = paths[ i ];
+						console.log(path.userData.node.className.baseVal);
+						
+						const fillColor = path.userData.style.fill;
+						console.log(fillColor);
+						if ( guiData.drawFillShapes && fillColor !== undefined && fillColor !== 'none' ) {
+
+
+							const material = new THREE.MeshLambertMaterial({color:0x9ea1a3});
+							const materialFloor = new THREE.MeshLambertMaterial({color:0x666666});
+								
+							const shapes = SVGLoader.createShapes( path );
+
+							for ( let j = 0; j < shapes.length; j ++ ) {
+
+								const shape = shapes[ j ];
+
+								// const geometry = new THREE.ShapeGeometry( shape );
+								
+								let floorDepth = 16;
+								if (fillColor == '#808080' || fillColor == 'rgb(128, 128, 128)') {
+									floorDepth = 2;
+								}
+
+								const extrudeSettings = {
+									steps: 2,
+									depth: floorDepth,
+									bevelEnabled: true, // def: true
+									bevelThickness: 1,
+									bevelSize: 1,
+									bevelOffset: 0,
+									bevelSegments: 1
+								};           
+
+								let geometry = new THREE.ExtrudeGeometry( shape, extrudeSettings );
+								
+								let mesh;
+								if (fillColor != '#808080' && fillColor != 'rgb(128, 128, 128)') {
+									mesh = new THREE.Mesh( geometry, material );	
+								} else {
+									mesh = new THREE.Mesh( geometry, materialFloor );
+									mesh.translateZ(14);
+								}
+								
+								
+
+								group.add( mesh );
+
+							}
+
+						}
+
+						const strokeColor = path.userData.style.stroke;
+
+						if ( guiData.drawStrokes && strokeColor !== undefined && strokeColor !== 'none' ) {
+
+							const material = new THREE.MeshBasicMaterial( {
+								color: new THREE.Color().setStyle( strokeColor ),
+								opacity: path.userData.style.strokeOpacity,
+								transparent: path.userData.style.strokeOpacity < 1,
+								side: THREE.DoubleSide,
+								depthWrite: false,
+								wireframe: guiData.strokesWireframe
+							} );
+
+							for ( let j = 0, jl = path.subPaths.length; j < jl; j ++ ) {
+
+								const subPath = path.subPaths[ j ];
+
+								const geometry = SVGLoader.pointsToStroke( subPath.getPoints(), path.userData.style );
+
+								if ( geometry ) {
+
+									const mesh = new THREE.Mesh( geometry, material );
+
+									group.add( mesh );
+
+								}
+
+							}
+
+						}
+
+					}
+
+					scene.add( group );
+
+				} );
+
+			}
+
+			function onWindowResize() {
+
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+
+				renderer.setSize( window.innerWidth, window.innerHeight );
+
+			}
+
+			function animate() {
+
+				requestAnimationFrame( animate );
+
+				render();
+				stats.update();
+
+			}
+
+			function render() {
+
+				renderer.render( scene, camera );
+
+			}
+
+			function exportToObj() {
+
+				const exporter = new OBJExporter();
+				const result = exporter.parse( group );
+
+
+				const blob = new Blob([ result ], {
+					"type": "application/x-msdownload"
+				});
+				const elm = document.createElement("a");
+				elm.href = window.URL.createObjectURL(blob);
+				elm.download = 'floormap.obj';
+				// elm.innerHTML = "dl";
+				document.body.appendChild(elm);
+				elm.click();
+
+				document.body.removeChild(elm);
+
+			}
+
+			/**
+			 * Utility 
+			 */
+			function degToRad (_num)
+			{
+				return _num * Math.PI / 180;
+			}
+
+			function radToDeg (_r)
+			{
+				return _r * 180 / Math.PI
+			}
+		</script>
+
+	</body>
+</html>

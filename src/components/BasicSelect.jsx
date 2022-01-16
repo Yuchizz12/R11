@@ -8,8 +8,17 @@ import FormLabel from '@mui/material/FormLabel'
 import Button from '@mui/material/Button'
 import Stack from '@mui/material/Stack'
 import List from '@mui/material/List'
+import { makeStyles } from '@mui/styles'
 
- const BasicSelect = ()=> {
+const useStyles = makeStyles({
+  root: {
+    minwidth: 350,
+    height: 80
+  }
+})
+
+const BasicSelect = () => {
+  const classes = useStyles()
   const [mode, setMode] = React.useState('')
 
   const handleChange = (event) => {
@@ -18,11 +27,19 @@ import List from '@mui/material/List'
 
   return (
     <>
-      <Box sx={{ minWidth: 120 }}>
-        <FormControl variant="filled" fullWidth>
+      <Box className={classes.root} sx={{ maxWidth: 220 }}>
+        <FormControl variant="filled" className={classes.root}>
           {/* <FormLabel component="legend">モード</FormLabel> */}
-          <InputLabel id="demo-simple-select-label">ポリシー</InputLabel>
-          <Select labelId="demo-simple-select-label" id="demo-simple-select" value={mode} label="Mode" onChange={handleChange}>
+          <InputLabel className={classes.root} id="demo-simple-select-label">
+            ポリシー
+          </InputLabel>
+          <Select
+            className={classes.root}
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={mode}
+            label="Mode"
+            onChange={handleChange}>
             <MenuItem value={10}>zxz10000</MenuItem>
             <MenuItem value={20}>zxz20000</MenuItem>
             <MenuItem value={30}>zxz30000</MenuItem>

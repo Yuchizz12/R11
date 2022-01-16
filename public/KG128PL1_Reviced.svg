@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="0 0 1320 480" xmlns="http://www.w3.org/2000/svg">
+   <g class="svg-floormap-floor" stroke="#666666" stroke-width="1" fill="#808080">
+    <polygon points="595 306,758 306,758 331,595 331" class="svg-floormap-floor" id="shape3"/>
+    <polygon points="45 108,593 108,593 420,45 420" class="svg-floormap-floor" id="shape4"/>
+    <polygon points="759 106,1311 106,1311 417,759 417" class="svg-floormap-floor" id="shape19"/>
+  </g>
+  <g class="svg-floormap-group" stroke="#87ceeb" stroke-width="1" fill="#3780B8">
+    <polygon points="595 334 596 333 755 333 756 334 756 414 755 415 695 415 695 452 692 454 687 454 686 455 666 455 659 453 658 453 656 451 656 415 596 415 595 414" class="svg-floormap" id="shape2"/>
+    <polygon points="543.9999389648438 413.9999694824219,543.9999389648438 328.9999694824219,587.9999389648438 328.9999694824219,587.9999389648438 413.9999694824219" class="svg-floormap" id="shape6"/>
+    <polygon points="451 412.9999694824219,451 328.9999694824219,542 328.9999694824219,542 412.9999694824219" class="svg-floormap" id="shape7"/>
+    <polygon points="49 308,449 308,449 415,49 415" class="svg-floormap" id="shape8"/>
+    <polygon points="141 220,142 219,250 219,251 220,251 305,250 306,89 306,88 305,88 287,89 286,141 286" class="svg-floormap" id="shape9"/>
+    <polygon points="89 219,139 219,139 284,89 284" class="svg-floormap" id="shape10"/>
+    <polygon points="49 219,86 219,86 305,49 305" class="svg-floormap" id="shape11"/>
+    <polygon points="450 218,542 218,542 306,450 306" class="svg-floormap" id="shape12"/>
+    <polygon points="253 218,323 218,323 306,253 306" class="svg-floormap" id="shape13"/>
+    <polygon points="544 114,545 113,584 113,585 114,585 166,584 167,556 167,556 185,555 186,545 186,544 185" class="svg-floormap" id="shape15"/>
+    <polygon points="499 114,500 113,541 113,542 114,542 185,541 186,530 186,529 185,529 167,500 167,499 166" class="svg-floormap" id="shape16"/>
+    <polygon points="422 198,422 113.00000762939453,497 113,497 198" class="svg-floormap" id="shape17"/>
+    <polygon points="49 114,50 113,419 113,420 114,420 200,447 200,448 201,448 298,448 305,447 306,392 306,390 306,382 306,326 306,325 305,325 216,50 216,49 215" class="svg-floormap" id="shape18"/>
+    <polygon points="840 328.9999694824219,904 328.9999694824219,904 413.9999694824219,840 413.9999694824219" class="svg-floormap" id="shape21"/>
+    <polygon points="766.9999389648438 412.9999694824219,766.9999389648438 328.9999694824219,837.9999389648438 328.9999694824219,837.9999389648438 412.9999694824219" class="svg-floormap" id="shape22"/>
+    <polygon points="872 265,905 265,905 305,872 305" class="svg-floormap" id="shape24"/>
+    <polygon points="842 265,870 265,870 305,842 305" class="svg-floormap" id="shape25"/>
+    <polygon points="1270 231,1304 231,1304 306,1270 306" class="svg-floormap" id="shape26"/>
+    <polygon points="1233 220,1234 219,1249 219,1258 219,1261 219,1303 219,1304 220,1304 228,1303 229,1268 229,1268 305,1267 306,1234 306,1233 305,1233 299,1234 298,1240 298,1240 227,1234 227,1233 226" class="svg-floormap" id="shape27"/>
+    <polygon points="992 306,992 219,1214 219,1214 306" class="svg-floormap" id="shape28"/>
+    <path d="M 974.094 221.094 L 975.094 220.094 L 990.094 220.094 L 991.094 221.094 L 991.094 309.094 L 1217.094 309.094 L 1217.094 221.094 L 1218.094 220.094 L 1231.094 220.094 L 1232.094 221.094 L 1232.094 229.094 L 1238.094 229.094 L 1239.094 230.094 L 1239.094 296.094 L 1238.094 297.094 L 1232.094 297.094 L 1232.094 309.094 L 1305.116 309.06 L 1305.094 414.094 L 908.094 415.094 L 908.099 308.249 L 974.094 308.094 L 974.094 221.094 Z" class="svg-floormap" id="shape29"/>
+    <polygon points="908 305,908 219,971 219,971 305" class="svg-floormap" id="shape30"/>
+    <polygon points="842 263,842 219,905 219,905 263" class="svg-floormap" id="shape31"/>
+    <polygon points="812 219,840 219,840 305,812 305" class="svg-floormap" id="shape32"/>
+    <polygon points="1237 109,1304 109,1304 197,1237 197" class="svg-floormap" id="shape35"/>
+    <polygon points="1170 109,1235 109,1235 197,1170 197" class="svg-floormap" id="shape36"/>
+    <polygon points="1104 109,1168 109,1168 197,1104 197" class="svg-floormap" id="shape37"/>
+    <polygon points="1031 109,1102 109,1102 197,1031 197" class="svg-floormap" id="shape38"/>
+    <polygon points="967 109,1029 109,1029 197,967 197" class="svg-floormap" id="shape39"/>
+    <polygon points="858 109,964 109,964 197,858 197" class="svg-floormap" id="shape40"/>
+    <polygon points="766 109,856 109,856 197,766 197" class="svg-floormap" id="shape41"/>
+    <polygon points="665 12,666 11,686 11,707 16,715 20,717 22,717 108,757 108,758 109,758 303,757 304,720 304,719 303,719 266,636 266,636 303,635 304,596 304,595 303,595 109,596 108,636 108,636 21,645 16,659 13,660 12" class="svg-floormap" id="shape42"/>
+  </g>
+</svg>

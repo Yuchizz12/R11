@@ -15,6 +15,32 @@ import BasicTimePicker from './BasicTimePicker'
 import IconButton from '@mui/material/IconButton'
 import BasicSelect from './BasicSelect'
 import RadioButtonsGroup from './RadioButtonsGroup'
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+import FormControlLabelPosition from './FormControlLabelPosition'
+
+const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
+
+const Checkboxes = ()=> {
+  return (
+    <div>
+      <Checkbox label="Label" defaultChecked />
+      <Checkbox {...label} />
+      <Checkbox {...label} disabled />
+      <Checkbox {...label} disabled checked />
+    </div>
+  )
+}
+
+function CheckboxLabels() {
+  return (
+    <FormGroup>
+      <FormControlLabel control={<Checkbox direction="row" spacing={2} defaultChecked />} label="Label" />
+      <FormControlLabel disabled control={<Checkbox direction="row" spacing={2} />} label="Disabled" />
+    </FormGroup>
+  )
+}
 
 const LeftDrawer = ()=> {
   const [state, setState] = React.useState({
@@ -31,7 +57,7 @@ const LeftDrawer = ()=> {
 
   const list = (anchor) => (
     <Box
-      sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 650 }}
+      sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 400 }}
       role="presentation"
       // onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}>
@@ -46,6 +72,7 @@ const LeftDrawer = ()=> {
           </ListItem>
         ))} */}
       </List>
+      <FormControlLabelPosition />
       <Box sx={{ m: 2 }}>
         <Divider />
         <BasicDatePicker />

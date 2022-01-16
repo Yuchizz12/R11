@@ -9,8 +9,17 @@ import FormControl from '@mui/material/FormControl'
 import FormLabel from '@mui/material/FormLabel'
 import List from '@mui/material/List'
 import TimePicker from '@mui/lab/TimePicker'
+import { makeStyles } from '@mui/styles'
 
- const BasicDatePicker = ( ) => {
+const useStyles = makeStyles({
+  root: {
+    width: 150,
+    height: 80
+  }
+})
+
+const BasicDatePicker = () => {
+  const classes = useStyles()
   const [value, setValue] = React.useState(null)
   const [endValue, setEndValue] = React.useState(null)
   return (
@@ -24,7 +33,7 @@ import TimePicker from '@mui/lab/TimePicker'
             onChange={(newValue) => {
               setValue(newValue)
             }}
-            renderInput={(params) => <TextField {...params} />}
+            renderInput={(params) => <TextField className={classes.root} {...params} />}
           />
           <Divider />
           <List></List>
@@ -39,7 +48,7 @@ import TimePicker from '@mui/lab/TimePicker'
             onChange={(newValue) => {
               setValue(newValue)
             }}
-            renderInput={(params) => <TextField {...params} />}
+            renderInput={(params) => <TextField className={classes.root} {...params} />}
           />
         </FormControl>
       </LocalizationProvider>
@@ -47,4 +56,4 @@ import TimePicker from '@mui/lab/TimePicker'
   )
 }
 
-export default BasicDatePicker 
+export default BasicDatePicker

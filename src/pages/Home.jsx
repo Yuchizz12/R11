@@ -16,6 +16,7 @@ const Home = ({ children }) => {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Map />
+      {/* <Map /> */}
     </ThemeProvider>
   )
 }

@@ -1,57 +1,38 @@
-import React, { useRef, useState } from 'react'
-import { ThemeProvider, createTheme } from '@mui/material/styles'
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
-import Home from './pages/Home'
-import Modeling from './pages/Modeling'
-import NavBar from './components/NavBar'
-import Other from './pages/Other'
-import City from './components/city/City'
-import Plane from './pages/Plane'
+import './styles.css'
+import * as THREE from 'three'
+import { Canvas } from '@react-three/fiber'
+import { useLoader } from '@react-three/fiber'
+import { Environment, OrbitControls } from '@react-three/drei'
+import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader'
+import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader'
+import { DDSLoader } from 'three-stdlib'
+import { Suspense } from 'react'
 
+THREE.DefaultLoadingManager.addHandler(/\.dds$/i, new DDSLoader())
 
-const Apps = ({ children }) => {
-  const [mode, setMode] = useState('light')
-  const theme = createTheme({
-    palette: {
-      mode
-    }
+const Scene = () => {
+  const materials = useLoader(MTLLoader, 'Poimandres.mtl')
+  const obj = useLoader(OBJLoader, 'KG128PL1_Reviced.svg.obj', (loader) => {
+    materials.preload()
+    loader.setMaterials(materials)
   })
-  // const theme = createTheme({
-  //   status: {
-  //     danger: '#e53e3e'
-  //   },
-  //   palette: {
-  //     primary: {
-  //       main: '#90caf9',
-  //       darker: '#053e85'
-  //     },
-  //     neutral: {
-  //       main: '#64748B',
-  //       contrastText: '#fff'
-  //     }
-  //   }
-  // })
+
+  console.log(obj)
+  return <primitive object={obj} scale={0.9} />
+}
+
+export default function Apps() {
   return (
-    <ThemeProvider theme={theme}>
-      <Router>
-        <NavBar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-        </Routes>
-        <Routes>
-          <Route path="/modeling" element={<Modeling />} />
-        </Routes>
-        <Routes>
-          <Route path="/other" element={<Other />} />
-        </Routes>
-        <Routes>
-          <Route path="/city" element={<City />} />
-        </Routes>
-        <Routes>
-          <Route path="/plane" element={<Plane />} />
-        </Routes>
-      </Router>
-    </ThemeProvider>
+    <div className="Apps">
+      <Canvas>
+        <Suspense fallback={null}>
+          <ambientLight intensity={0.5} />
+          <Scene />
+          <OrbitControls />
+          <gridHelper args={[20, 100]} />
+          {/* <Environment preset="sunset" background /> */}
+        </Suspense>
+      </Canvas>
+    </div>
   )
 }
-export default Apps

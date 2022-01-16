@@ -13,7 +13,7 @@ const RadioButtonsGroup = ()=> {
   return (
     <FormControl component="fieldset">
       <FormLabel component="legend">モード</FormLabel>
-      <RadioGroup aria-label="gender" defaultValue="play" name="radio-buttons-group">
+      <RadioGroup size="small" aria-label="gender" defaultValue="play" name="radio-buttons-group">
         <FormControlLabel size="small" value="play" control={<Radio />} label="再生" />
         <FormControlLabel size="small" value="replay" control={<Radio />} label="巻き戻し" />
         <FormControlLabel size="small" value="fastplay" control={<Radio />} label="早送り" />
