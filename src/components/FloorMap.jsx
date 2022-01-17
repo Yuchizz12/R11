@@ -10,19 +10,20 @@ import { Suspense } from 'react'
 import { zhCN } from 'date-fns/locale'
 import NavBar from './NavBar'
 import Ball from './Ball'
+import { DoubleSide } from 'three'
 
 THREE.DefaultLoadingManager.addHandler(/\.dds$/i, new DDSLoader())
 
 
 const Scene = () => {
-  const materials = useLoader(MTLLoader, 'Poimandres.mtl')
+  const materials = useLoader(MTLLoader, 'Poimandres.mtl')  
   const obj = useLoader(OBJLoader, 'KG128PL1_Reviced.svg.obj', (loader) => {
     materials.preload()
     loader.setMaterials(materials)
   })
 
   console.log(obj)
-  return <primitive object={obj} scale={1.3} position={[-200, 100, 0]} />
+    return <primitive object={obj} scale={1.3} position={[-200, 100, 0]} />
 }
 
 const Scenes = () => {
@@ -51,11 +52,14 @@ const FloorMap = ()=> {
   return (
     // <div className="Apps">
     //   <NavBar />
-    <Canvas>
+    <Canvas style={{ background: '#171717' }}>
+      <ambientLight intensity={1} />
+      <spotLight intensity={0.5} angle={0.1} penumbra={1} position={[10, 15, 10]} castShadow />
       <Suspense fallback={null}>
         <ambientLight intensity={0.06} />
+        <directionalLight color="red" position={[0, 0, 500]} />
         {/* <gridHelper args={[900, 100]} position={[-200, 200, 0]} /> */}
-              <Ball scale={1} position={[-10, 200, 110]} />
+        <Ball scale={1} position={[-10, 200, 110]} />
         <Scene />
         {/* <Scenes /> */}
         <OrbitControls />

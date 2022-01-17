@@ -1,38 +1,55 @@
-import './styles.css'
 import * as THREE from 'three'
-import { Canvas } from '@react-three/fiber'
-import { useLoader } from '@react-three/fiber'
-import { Environment, OrbitControls } from '@react-three/drei'
-import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader'
-import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader'
-import { DDSLoader } from 'three-stdlib'
-import { Suspense } from 'react'
+import ReactDOM from 'react-dom'
+import React, { useState, useEffect } from 'react'
+import { Canvas } from 'react-three-fiber'
+import flatten from 'lodash-es/flatten'
+// import { SVGLoader as loader } from './SVGLoader'
+import { SVGLoader as loader } from 'three/examples/jsm/loaders/SVGLoader'
+import './styles.css'
 
-THREE.DefaultLoadingManager.addHandler(/\.dds$/i, new DDSLoader())
+const svgResource = new Promise((resolve) =>
+  new loader().load('https://raw.githubusercontent.com/drcmda/react-three-fiber/master/examples/resources/images/svg/night.svg', (shapes) =>
+    resolve(flatten(shapes.map((group, index) => group.toShapes(true).map((shape) => ({ shape, color: group.color, index })))))
+  )
+)
 
-const Scene = () => {
-  const materials = useLoader(MTLLoader, 'Poimandres.mtl')
-  const obj = useLoader(OBJLoader, 'KG128PL1_Reviced.svg.obj', (loader) => {
-    materials.preload()
-    loader.setMaterials(materials)
-  })
-
-  console.log(obj)
-  return <primitive object={obj} scale={0.9} />
-}
-
-export default function Apps() {
+function Shape({ shape, position, color, opacity, index }) {
   return (
-    <div className="Apps">
-      <Canvas>
-        <Suspense fallback={null}>
-          <ambientLight intensity={0.5} />
-          <Scene />
-          <OrbitControls />
-          <gridHelper args={[20, 100]} />
-          {/* <Environment preset="sunset" background /> */}
-        </Suspense>
-      </Canvas>
-    </div>
+    <mesh position={[0, 0, -index * 50]}>
+      <meshPhongMaterial attach="material" color={color} side={THREE.DoubleSide} />
+      <shapeBufferGeometry attach="geometry" args={[shape]} />
+    </mesh>
   )
 }
+
+function Scene() {
+  const [shapes, set] = useState([])
+  useEffect(() => void svgResource.then(set), [])
+  return (
+    <group position={[1600, -700, 0]} rotation={[0, THREE.Math.degToRad(180), 0]}>
+      {shapes.map((item) => (
+        <Shape key={item.shape.uuid} {...item} />
+      ))}
+    </group>
+  )
+}
+
+function Apps() {
+  return (
+    // <div class="main">
+      <Canvas
+        camera={{
+          fov: 80,
+          position: [0, 0, 2000],
+          rotation: [0, THREE.Math.degToRad(-20), THREE.Math.degToRad(180)],
+          far: 20000
+        }}>
+        <ambientLight intensity={0.5} />
+        <spotLight intensity={0.5} position={[300, 300, 4000]} />
+        <Scene />
+      </Canvas>
+    // </div>
+  )
+}
+
+export default Apps

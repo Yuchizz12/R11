@@ -3,6 +3,7 @@ import React, { Suspense, useState, useRef, useEffect, useLayoutEffect, useMemo 
 import { Canvas, useLoader } from '@react-three/fiber'
 import { SVGLoader } from 'three/examples/jsm/loaders/SVGLoader'
 import { Text, MapControls, OrbitControls } from '@react-three/drei'
+import { DoubleSide } from 'three'
 import './styles.css'
 
 const hoveredCursor =
@@ -36,8 +37,23 @@ function Cell({ color, shape, fillOpacity, text }) {
 
 function Svg({ url }) {
   const { paths } = useLoader(SVGLoader, url)
+  // const shapes = useMemo(
+  //   () =>
+  //     paths.flatMap((p) =>
+  //       p
+  //         .toShapes(true)
+  //         .map((shape) => ({
+  //           drawFillShapes: true,
+  //           drawStrokes: true,
+  //           shape,
+  //           color: p.color,
+  //           fillOpacity: p.userData.style.stroke.fillOpacity
+  //         }))
+  //     ),
+  //   [paths]
+  // )
   const shapes = useMemo(
-    () => paths.flatMap((p) => p.toShapes(true).map((shape) => ({ shape, color: p.color, fillOpacity: p.userData.style.fillOpacity }))),
+    () => paths.flatMap((path, index) => path.toShapes(true).map((shape) => ({ index, shape, color: path.color, side: DoubleSide }))),
     [paths]
   )
 
@@ -50,7 +66,7 @@ function Svg({ url }) {
   return (
     <group ref={ref}>
       {shapes.map((props, index) => (
-        <Cell key={props.shape.uuid} {...props} text={index % 20 || `Cell ${index}`} />
+        <Cell key={props.shape.uuid} {...props} text={index % 20 || `Cell ${index}`} side={DoubleSide} />
       ))}
     </group>
   )
@@ -59,8 +75,12 @@ function Svg({ url }) {
 function City() {
   return (
     <Canvas frameloop="demand" orthographic camera={{ position: [0, 0, 50], zoom: 2, up: [0, 0, 1], far: 10000 }}>
+      <ambientLight intensity={1} />
+      <spotLight intensity={0.5} angle={0.1} penumbra={1} position={[10, 15, 10]} castShadow />
       <Suspense fallback={null}>
-        <Svg url="/map.svg" />
+        {/* <Svg url="/map.svg" drawFillShapes={true} drawStrokes={true} /> */}
+        <Svg url="/KG128PL1_Reviced.svg" drawFillShapes={true} drawStrokes={true} side={DoubleSide} />
+        {/* <Svg url="/KG128PL2_Reviced.svg" drawFillShapes={true} drawStrokes={true} /> */}
       </Suspense>
       <MapControls />
       <OrbitControls />
