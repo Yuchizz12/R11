@@ -5,7 +5,7 @@ const Ball = ({ position }) => {
     <>
       <mesh position={position}>
         <sphereBufferGeometry visible position={[0, 0, 2]} args={[1, 250, 250]} />
-        <meshStandardMaterial attach="material" color="#00F5D4" roughness={0} />
+        <meshStandardMaterial attach="material" color="red" roughness={0} />
       </mesh>
     </>
   )

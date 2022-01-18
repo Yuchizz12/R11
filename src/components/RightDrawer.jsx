@@ -14,7 +14,7 @@ import MenuIcon from '@mui/icons-material/Menu'
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
 import SimpleAccordion from './SimpleAccordion'
 import KeyboardTabOutlinedIcon from '@mui/icons-material/KeyboardTabOutlined'
-import CheckBox from '../components/atoms/CheckBox'
+import CheckBox from './CheckBox'
 
 const RightDrawer = ()=> {
   const [state, setState] = React.useState({

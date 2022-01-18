@@ -5,12 +5,12 @@ import Home from './pages/Home'
 import Modeling from './pages/Modeling'
 import NavBar from './components/NavBar'
 import Other from './pages/Other'
-import City from './components/city/City'
+import City from './components/City'
 import Plane from './pages/Plane'
 
 
 const App = ({ children }) => {
-  const [mode, setMode] = useState('light')
+  const [mode, setMode] = useState('dark')
   const theme = createTheme({
     palette: {
       mode

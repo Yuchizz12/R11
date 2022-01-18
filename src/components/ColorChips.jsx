@@ -3,7 +3,7 @@ import Chip from '@mui/material/Chip'
 import Stack from '@mui/material/Stack'
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt'
 
-const ColorChips =()=> {
+const ColorChips = () => {
   return (
     <Stack spacing={4} alignItems="start">
       <Stack direction="row" spacing={1}>
