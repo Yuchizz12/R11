@@ -7,15 +7,16 @@ import NavBar from './components/NavBar'
 import Other from './pages/Other'
 import City from './components/City'
 import Plane from './pages/Plane'
+import { purple } from '@mui/material/colors'
 
 
 const App = ({ children }) => {
-  const [mode, setMode] = useState('dark')
-  const theme = createTheme({
-    palette: {
-      mode
-    }
-  })
+  // const [mode, setMode] = useState('dark')
+  // const theme = createTheme({
+  //   palette: {
+  //     mode
+  //   }
+  // })
   // const theme = createTheme({
   //   status: {
   //     danger: '#e53e3e'
@@ -31,10 +32,22 @@ const App = ({ children }) => {
   //     }
   //   }
   // })
+  const theme = createTheme({
+    palette: {
+      primary: {
+        // Purple and green play nicely together.
+        main: purple[500]
+      },
+      secondary: {
+        // This is green.A700 as hex.
+        main: '#11cb5f'
+      }
+    }
+  })
   return (
     <ThemeProvider theme={theme}>
       <Router>
-        <NavBar />
+        <NavBar color="secondary" />
         <Routes>
           <Route path="/" element={<Home />} />
         </Routes>
